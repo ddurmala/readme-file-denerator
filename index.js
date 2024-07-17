@@ -37,7 +37,7 @@ inquirer.prompt([
         type: 'list',
         message: 'Choose a license: ',
         choices: [
-            'MIT', 'GNU General Public License', 'Apahe License', 'Creative Commons License'
+            'MIT', 'GPL-2.0', 'Apache-2.0', 'AFL-3.0'
         ]
     },
     {
@@ -77,6 +77,20 @@ inquirer.prompt([
         }
     });
 });
+'', '', ''
+
+function badgeGenerator(license) {
+    switch (license) {
+        case 'MIT':
+            return 'MIT';
+        case 'GPL-2.0':
+            return 'GNU';
+        case 'Apache-2.0':
+            return 'Apache';
+        case 'AFL-3.0':
+            return 'AFL';
+    }
+}
 
 function createReadme(data) {
     return `# ${data.title}
@@ -104,11 +118,12 @@ ${data.collabLinks}
 
 ## License
 
-${data.license}
+${data.license} \n
+https://opensource.org/license/${data.license}
 
 ## Badges
 
-![License: ${data.license}](https://img.shields.io/badge/License-${encodeURIComponent(data.license)}-yellow.svg)
+![License: ${data.license}](https://img.shields.io/badge/License-${badgeGenerator(data.license)}-yellow.svg)
 
 ## How to Contribute
 
